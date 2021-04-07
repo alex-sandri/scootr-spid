@@ -1,0 +1,28 @@
+{
+    "name": "simevo/spid-php-lib-example",
+    "description": "Demo application based on spid-php-lib",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "authors": [{
+            "name": "Lorenzo Cattaneo",
+            "email": "development@lorenzocattaneo.com"
+        },
+        {
+            "name": "Paolo Greppi",
+            "email": "paolo.greppi@libpf.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "italia/spid-php-lib": "^0.35.0",
+        "vlucas/phpdotenv": "^5.3",
+        "endyjasmi/cuid": "^2.1",
+        "stripe/stripe-php": "^7.76"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5",
+        "guzzlehttp/guzzle": "^6.5",
+        "behat/mink-goutte-driver": "^1.2",
+        "symfony/dotenv": "^4.4"
+    }
+}
