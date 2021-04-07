@@ -50,7 +50,7 @@ if ($sp->isAuthenticated())
 
     if (pg_numrows($result) === 0)
     {
-        $id = "usr_" . \EndyJasmi\Cuid::cuid();
+        $user_id = "usr_" . \EndyJasmi\Cuid::cuid();
 
         pg_query("begin");
 
@@ -65,7 +65,7 @@ if ($sp->isAuthenticated())
                     ($1, $2, $3, $4, $5, $6)
                 ',
                 [
-                    $id,
+                    $user_id,
                     $first_name,
                     $last_name,
                     $email,
@@ -80,7 +80,7 @@ if ($sp->isAuthenticated())
                 "name" => $first_name . " " . $last_name,
                 "email" => $email,
                 "metadata" => [
-                    "user_id" => $id,
+                    "user_id" => $user_id,
                 ],
             ]);
 
@@ -93,11 +93,24 @@ if ($sp->isAuthenticated())
     }
     else
     {
-        $id = pg_fetch_row($result)[0];
+        $user_id = pg_fetch_row($result)[0];
     }
 
+    $session_id = "ses_" . \EndyJasmi\Cuid::cuid();
+    $session_expires_at = time() + 60 * 60 * 24 * 30;
+
     // TODO:
-    // Generate Session Cookie for user $id
+    // Generate Session Cookie for user $user_id with id $session_id
+
+    setcookie(
+        "session_id",
+        $session_id,
+        $session_expires_at,
+        "/",
+        $_ENV["ENV"] === "prod" ? $_ENV["CLIENT_HOST"] : false,
+        $_ENV["ENV"] === "prod",
+        true
+    );
 
     header("Location: " . $_ENV["CLIENT_HOST"]);
 }
