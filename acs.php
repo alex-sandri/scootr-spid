@@ -127,7 +127,7 @@ if ($sp->isAuthenticated())
     setcookie(
         "session_id",
         $session_id,
-        $session_expires_at,
+        $session_expires_at->getTimestamp(),
         "/",
         $_ENV["ENV"] === "prod" ? $_ENV["CLIENT_HOST"] : false,
         $_ENV["ENV"] === "prod",
