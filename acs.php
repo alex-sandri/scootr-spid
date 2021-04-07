@@ -98,7 +98,9 @@ if ($sp->isAuthenticated())
     }
 
     $session_id = "ses_" . \EndyJasmi\Cuid::cuid();
-    $session_expires_at = time() + 60 * 60 * 24 * 30;
+
+    $session_expires_at = new DateTime("now", new DateTimeZone("UTC"));
+    $session_expires_at->add(new DateInterval("P1M"));
 
     try
     {
@@ -113,7 +115,7 @@ if ($sp->isAuthenticated())
             [
                 $session_id,
                 $user_id,
-                $session_expires_at,
+                $session_expires_at->format(DateTime::ATOM),
             ]
         );
     }
