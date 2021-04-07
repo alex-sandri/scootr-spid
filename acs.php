@@ -89,6 +89,8 @@ if ($sp->isAuthenticated())
         catch (Exception $e)
         {
             pg_query("rollback");
+
+            exit;
         }
     }
     else
@@ -99,8 +101,27 @@ if ($sp->isAuthenticated())
     $session_id = "ses_" . \EndyJasmi\Cuid::cuid();
     $session_expires_at = time() + 60 * 60 * 24 * 30;
 
-    // TODO:
-    // Generate Session Cookie for user $user_id with id $session_id
+    try
+    {
+        pg_query_params(
+            $connection,
+            '
+            insert into "sessions"
+                ("id", "user", "expires_at")
+            values
+                ($1, $2, $3)
+            ',
+            [
+                $session_id,
+                $user_id,
+                $session_expires_at,
+            ]
+        );
+    }
+    catch (Exception $e)
+    {
+        exit;
+    }
 
     setcookie(
         "session_id",
