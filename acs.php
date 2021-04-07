@@ -132,7 +132,7 @@ if ($sp->isAuthenticated())
             "path" => "/",
             "domain" => $_ENV["ENV"] === "prod" ? $_ENV["CLIENT_HOST"] : false,
             "secure" => $_ENV["ENV"] === "prod",
-            "httponly" => true,
+            "httponly" => false,
             "samesite" => "Strict",
         ]
     );
