@@ -127,11 +127,14 @@ if ($sp->isAuthenticated())
     setcookie(
         "session_id",
         $session_id,
-        $session_expires_at->getTimestamp(),
-        "/",
-        $_ENV["ENV"] === "prod" ? $_ENV["CLIENT_HOST"] : false,
-        $_ENV["ENV"] === "prod",
-        true
+        [
+            "expires" => 0,
+            "path" => "/",
+            "domain" => $_ENV["ENV"] === "prod" ? $_ENV["CLIENT_HOST"] : false,
+            "secure" => $_ENV["ENV"] === "prod",
+            "httponly" => true,
+            "samesite" => "Strict",
+        ]
     );
 
     header("Location: " . $_ENV["CLIENT_HOST"]);
