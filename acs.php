@@ -49,7 +49,7 @@ if ($sp->isAuthenticated())
 
     if (pg_numrows($result) === 0)
     {
-        $user_id = "usr_" . \EndyJasmi\Cuid::cuid();
+        $user_id = "usr_" . bin2hex(random_bytes(30));
 
         pg_query("begin");
 
