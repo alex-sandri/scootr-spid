@@ -16,7 +16,6 @@
         "php": ">=7.2",
         "italia/spid-php-lib": "^0.35.0",
         "vlucas/phpdotenv": "^5.3",
-        "endyjasmi/cuid": "^2.1",
         "stripe/stripe-php": "^7.76"
     },
     "require-dev": {

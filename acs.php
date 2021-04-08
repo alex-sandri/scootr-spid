@@ -97,7 +97,7 @@ if ($sp->isAuthenticated())
         $user_id = pg_fetch_row($result)[0];
     }
 
-    $session_id = "ses_" . \EndyJasmi\Cuid::cuid();
+    $session_id = "ses_" . bin2hex(random_bytes(50));
 
     $session_expires_at = new DateTime("now", new DateTimeZone("UTC"));
     $session_expires_at->add(new DateInterval("P1M"));
