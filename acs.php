@@ -50,6 +50,7 @@ if ($sp->isAuthenticated())
     if (pg_numrows($result) === 0)
     {
         $user_id = "usr_" . bin2hex(random_bytes(30));
+        $wallet_id = "wlt_" . bin2hex(random_bytes(30));
 
         pg_query("begin");
 
@@ -70,6 +71,36 @@ if ($sp->isAuthenticated())
                     $email,
                     $birth_date,
                     $fiscal_number,
+                ]
+            );
+
+            pg_query_params(
+                $connection,
+                '
+                insert into "wallets"
+                    ("id", "name", "balance", "user")
+                values
+                    ($1, $2, $3, $4)
+                ',
+                [
+                    $wallet_id,
+                    "Predefinito",
+                    0,
+                    $user_id,
+                ]
+            );
+
+            pg_query_params(
+                $connection,
+                '
+                insert into "default_wallets"
+                    ("user", "wallet")
+                values
+                    ($1, $2)
+                ',
+                [
+                    $user_id,
+                    $wallet_id,
                 ]
             );
 
