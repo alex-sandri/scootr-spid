@@ -78,6 +78,9 @@ if ($sp->isAuthenticated())
             $stripe->customers->create([
                 "name" => $first_name . " " . $last_name,
                 "email" => $email,
+                "preferred_locales" => [
+                    "it",
+                ],
                 "metadata" => [
                     "user_id" => $user_id,
                 ],
