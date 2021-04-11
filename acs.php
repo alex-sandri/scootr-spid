@@ -113,7 +113,7 @@ if ($sp->isAuthenticated())
                     "it",
                 ],
                 "metadata" => [
-                    "user_id" => $user_id,
+                    "wallet_id" => $wallet_id,
                 ],
             ]);
 
