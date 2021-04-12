@@ -41,10 +41,10 @@ if ($sp->isAuthenticated())
         '
         select "id"
         from "users"
-        where "email" = $1
+        where "fiscal_number" = $1
         limit 1
         ',
-        [ $email ]
+        [ $fiscal_number ]
     );
 
     if (pg_numrows($result) === 0)
