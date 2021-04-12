@@ -1,9 +1,12 @@
 <?php
 
-if ($sp->isAuthenticated()) {
+require_once __DIR__ . "/config/sp.php";
+
+if ($sp->isAuthenticated())
+{
     echo "Logout failed!<br>";
-    echo "<a href=\"/\">Home</a>";
-} else {
+}
+else
+{
     echo "Logout succesful!<br>";
-    echo "<a href=\"/\">Home</a>";
 }
