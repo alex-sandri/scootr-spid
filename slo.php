@@ -2,11 +2,14 @@
 
 require_once __DIR__ . "/config/sp.php";
 
-if ($sp->isAuthenticated())
+if ($sp->getAttributes())
 {
-    echo "Logout failed!<br>";
+    // The fiscal number is returned in the format TINIT-FISCALNUMBER
+    $fiscal_number = explode("-", $sp->getAttributes()["fiscalNumber"])[1];
+
+    // TODO
+    // Delete all sessions associated with this user
 }
-else
-{
-    echo "Logout succesful!<br>";
-}
+
+// Called to complete the logout process
+$sp->isAuthenticated();
