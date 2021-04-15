@@ -56,14 +56,13 @@ if ($sp->isAuthenticated())
                 $connection,
                 '
                 insert into "wallets"
-                    ("id", "name", "balance", "user")
+                    ("id", "name", "user")
                 values
-                    ($1, $2, $3, $4)
+                    ($1, $2, $3)
                 ',
                 [
                     $wallet_id,
                     "Predefinito",
-                    0,
                     $user_id,
                 ]
             );
