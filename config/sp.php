@@ -19,7 +19,7 @@ $settings = [
     ],
     "sp_org_name" => "scootr",
     "sp_org_display_name" => "scootr",
-    "idp_metadata_folder" => __DIR__ . "/../sp_conf/",
+    "idp_metadata_folder" => __DIR__ . "/../idp_metadata/",
     "sp_attributeconsumingservice" => [
         [ "fiscalNumber" ],
         [ "name", "familyName", "fiscalNumber", "email", "dateOfBirth" ]
