@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . "/vendor/autoload.php";
+require_once __DIR__ . "/config/Config.php";
 require_once __DIR__ . "/config/sp.php";
 
 if ($sp->isAuthenticated())
@@ -13,6 +14,17 @@ if ($sp->isAuthenticated())
     $birth_date = $sp->getAttributes()["dateOfBirth"];
     // The fiscal number is returned in the format TINIT-FISCALNUMBER
     $fiscal_number = explode("-", $sp->getAttributes()["fiscalNumber"])[1];
+
+    $age = DateTime::createFromFormat("Y-m-d", $birth_date)
+        ->diff(new DateTime("now", new DateTimeZone("UTC")))
+        ->y;
+
+    if ($age < Config::MIN_AGE)
+    {
+        header("Location: " . $_ENV["CLIENT_HOST"]);
+
+        exit;
+    }
 
     $result = pg_query_params(
         $connection,
