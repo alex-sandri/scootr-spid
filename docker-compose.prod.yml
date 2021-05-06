@@ -13,7 +13,7 @@ services:
     volumes:
       - sp-azure:/app/sp_conf
     network_mode: bridge
-    domainname: scootrspidsp
+    domainname: scootrspid
 
   idp-testenv:
     image: italia/spid-testenv2
@@ -24,7 +24,7 @@ services:
     volumes:
       - idp-azure:/app/conf
     network_mode: bridge
-    domainname: scootrspididp
+    domainname: scootrspid
 
 volumes:
   sp-azure:
