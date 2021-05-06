@@ -7,7 +7,7 @@ services:
     image: spidregistry.azurecr.io/sp
     container_name: sp
     env_file:
-      - .env
+      - .env.prod
     ports:
       - 80:80
     volumes:
