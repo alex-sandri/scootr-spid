@@ -4,4 +4,4 @@
 
 ## Deploy
 
-`docker compose up -f docker-compose.prod.yml`
+`docker compose -f docker-compose.prod.yml up`
