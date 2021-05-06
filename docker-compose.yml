@@ -12,7 +12,7 @@ services:
       - 8099:80
     volumes:
       - type: bind
-        source: ./sp_conf
+        source: sp_azure
         target: /app/sp_conf
     network_mode: bridge
 
@@ -24,6 +24,18 @@ services:
     restart: always
     volumes:
       - type: bind
-        source: ./idp_conf
+        source: idp_azure
         target: /app/conf
     network_mode: bridge
+
+volumes:
+  sp_azure:
+    driver: azure_file
+    driver_opts:
+      share_name: conf
+      storage_account_name: scootrspidsp
+  idp_azure:
+    driver: azure_file
+    driver_opts:
+      share_name: conf
+      storage_account_name: scootrspididp
