@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   sp:
+    container_name: sp
     build:
       context: .
       dockerfile: Dockerfile
@@ -15,6 +16,7 @@ services:
     network_mode: bridge
 
   idp-testenv:
+    container_name: idp-testenv
     image: italia/spid-testenv2
     ports:
       - 8088:8088
