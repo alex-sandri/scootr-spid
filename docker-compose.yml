@@ -9,9 +9,9 @@ services:
     env_file:
       - .env
     ports:
-      - 8099:80
+      - 80:80
     volumes:
-      - sp_azure:/app/sp_conf
+      - sp-azure:/app/sp_conf
     network_mode: bridge
 
   idp-testenv:
@@ -21,16 +21,16 @@ services:
       - 8088:8088
     restart: always
     volumes:
-      - idp_azure:/app/conf
+      - idp-azure:/app/conf
     network_mode: bridge
 
 volumes:
-  sp_azure:
+  sp-azure:
     driver: azure_file
     driver_opts:
       share_name: conf
       storage_account_name: scootrspidsp
-  idp_azure:
+  idp-azure:
     driver: azure_file
     driver_opts:
       share_name: conf
