@@ -1,0 +1,37 @@
+version: "3.9"
+services:
+  sp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: spidregistry.azurecr.io/sp
+    container_name: sp
+    env_file:
+      - .env
+    ports:
+      - 80:80
+    volumes:
+      - sp-azure:/app/sp_conf
+    network_mode: bridge
+
+  idp-testenv:
+    image: italia/spid-testenv2
+    container_name: idp-testenv
+    ports:
+      - 8088:8088
+    restart: always
+    volumes:
+      - idp-azure:/app/conf
+    network_mode: bridge
+
+volumes:
+  sp-azure:
+    driver: azure_file
+    driver_opts:
+      share_name: conf
+      storage_account_name: scootrspidsp
+  idp-azure:
+    driver: azure_file
+    driver_opts:
+      share_name: conf
+      storage_account_name: scootrspididp
