@@ -1,9 +1,16 @@
 FROM php:7.3-apache
+
 RUN a2enmod rewrite
 RUN service apache2 restart
+
 WORKDIR /app
-COPY . /app
+
+COPY /idp_metadata /idp_metadata
+COPY /sp_conf /sp_conf
+COPY /src .
+
 VOLUME /app/sp_conf
+
 RUN rm -rf /var/www/html && ln -s /app /var/www/html
 RUN apt update -y && apt install -y git zip libpq-dev
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
