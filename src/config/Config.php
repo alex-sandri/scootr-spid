@@ -9,5 +9,8 @@ class Config
 {
     const MIN_AGE = 18;
 
-    static $IS_PRODUCTION = $_ENV["ENV"] === "prod";
+    public static function is_prod(): bool
+    {
+        return $_ENV["ENV"] === "prod";
+    }
 }

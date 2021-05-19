@@ -11,7 +11,7 @@ if (!isset($_GET["idp"]) || empty($_GET["idp"]))
 
 $idp = $_GET["idp"];
 
-if (Config::$IS_PRODUCTION && $idp === "idp_testenv2")
+if (Config::is_prod() && $idp === "idp_testenv2")
 {
     http_response_code(403);
 
