@@ -8,6 +8,8 @@ WORKDIR /app
 COPY /idp_metadata /idp_metadata
 COPY /sp_conf /sp_conf
 COPY /src .
+COPY /composer.json .
+COPY /composer.lock .
 
 VOLUME /app/sp_conf
 
