@@ -41,3 +41,12 @@
 
 12. Bind the SSL certificate to the web app\
 `az webapp config ssl bind --certificate-thumbprint {certificate-thumbprint} --name scootr --resource-group scootr --ssl-type SNI`
+
+13. Add environment settings to the web app\
+```
+az webapp config appsettings set -g scootr -n scootr --settings ENV=
+az webapp config appsettings set -g scootr -n scootr --settings SP_ENTITYID=
+az webapp config appsettings set -g scootr -n scootr --settings DATABASE_CONNECTION_STRING=
+az webapp config appsettings set -g scootr -n scootr --settings STRIPE_SECRET_API_KEY=
+az webapp config appsettings set -g scootr -n scootr --settings CLIENT_HOST=
+```
