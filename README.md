@@ -18,5 +18,14 @@
 4. Sign in to the registry\
 `docker login scootrregistry.azurecr.io --username scootrregistry`
 
-5. Create an App Service plan\
+5. Build the local image\
+`docker build . -t sp:latest`
+
+6. Tag the local image for the registry\
+`docker tag sp scootrregistry.azurecr.io/sp:latest`
+
+7. Push *Service Provider* image to the registry\
+`docker push scootrregistry.azurecr.io/sp:latest`
+
+8. Create an App Service plan\
 `az appservice plan create --name scootr-asp --resource-group scootr --sku B1 --is-linux`
