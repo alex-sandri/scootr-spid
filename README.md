@@ -66,7 +66,12 @@ az webapp config ssl create --resource-group scootr --name scootr --hostname spi
 az webapp config ssl bind --certificate-thumbprint {certificate-thumbprint} --name scootr --resource-group scootr --ssl-type SNI
 ```
 
-13. Add environment settings to the web app
+13. Set HTTPS Only mode
+```
+az webapp update --https-only true --name scootr --resource-group scootr
+```
+
+14. Add environment settings to the web app
 ```
 az webapp config appsettings set -g scootr -n scootr --settings ENV=
 az webapp config appsettings set -g scootr -n scootr --settings SP_ENTITYID=
