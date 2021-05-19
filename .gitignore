@@ -1,6 +1,7 @@
 /vendor
 
 .env
+.env.prod
 
 /sp_conf/sp.crt
 /sp_conf/sp.key
