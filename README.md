@@ -29,3 +29,15 @@
 
 8. Create an App Service plan\
 `az appservice plan create --name scootr-asp --resource-group scootr --sku B1 --is-linux`
+
+9. Create Web App\
+`az webapp create --resource-group scootr --plan scootr-asp --name scootr --deployment-container-image-name scootrregistry.azurecr.io/sp:latest`
+
+10. Add custom domain\
+`az webapp config hostname add --hostname spid.scootr.it --resource-group scootr --webapp-name scootr`
+
+11. Create a managed certificate for the custom domain\
+`az webapp config ssl create --resource-group scootr --name scootr --hostname spid.scootr.it`
+
+12. Bind the SSL certificate to the web app\
+`az webapp config ssl bind --certificate-thumbprint {certificate-thumbprint} --name scootr --resource-group scootr --ssl-type SNI`
