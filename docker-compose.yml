@@ -12,7 +12,7 @@ services:
     volumes:
       - type: bind
         source: ./sp_conf
-        target: /app/sp_conf
+        target: /var/www/sp_conf
     network_mode: bridge
 
   idp-testenv:
@@ -24,5 +24,5 @@ services:
     volumes:
       - type: bind
         source: ./idp_conf
-        target: /app/conf
+        target: /var/www/conf
     network_mode: bridge

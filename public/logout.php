@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "/config/sp.php";
+require_once __DIR__ . "/../src/config/sp.php";
 
 if (!$url = $sp->logoutPost(0))
 {

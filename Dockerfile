@@ -3,17 +3,15 @@ FROM php:7.3-apache
 RUN a2enmod rewrite
 RUN service apache2 restart
 
-WORKDIR /app
+WORKDIR /var/www
 
-COPY /idp_metadata /idp_metadata
-COPY /sp_conf /sp_conf
-COPY /src .
-COPY /composer.json .
-COPY /composer.lock .
+RUN rm -rf ./html
 
-VOLUME /app/sp_conf
+COPY . .
+COPY ./public ./html
 
-RUN rm -rf /var/www/html && ln -s /app /var/www/html
+VOLUME ./sp_conf
+
 RUN apt update -y && apt install -y git zip libpq-dev
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pgsql pdo_pgsql
