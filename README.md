@@ -6,6 +6,8 @@
 
 ### Production
 
+#### Service Provider
+
 1. Create a resource group
 ```
 az group create --name scootr --location "West Europe"
@@ -73,9 +75,40 @@ az webapp update --https-only true --name scootr --resource-group scootr
 
 14. Add environment settings to the web app
 ```
-az webapp config appsettings set -g scootr -n scootr --settings ENV=
-az webapp config appsettings set -g scootr -n scootr --settings SP_ENTITYID=
-az webapp config appsettings set -g scootr -n scootr --settings DATABASE_CONNECTION_STRING=
-az webapp config appsettings set -g scootr -n scootr --settings STRIPE_SECRET_API_KEY=
-az webapp config appsettings set -g scootr -n scootr --settings CLIENT_HOST=
+az webapp config appsettings set -g scootr -n scootr --settings ENV="prod"
+az webapp config appsettings set -g scootr -n scootr --settings SP_ENTITYID="https://spid.scootr.it"
+az webapp config appsettings set -g scootr -n scootr --settings DATABASE_CONNECTION_STRING="host={DB_HOST} port={DB_PORT} dbname={DB_NAME} user={DB_USER} password={DB_PASS}"
+az webapp config appsettings set -g scootr -n scootr --settings STRIPE_SECRET_API_KEY="{STRIPE_SECRET_API_KEY}"
+az webapp config appsettings set -g scootr -n scootr --settings CLIENT_HOST="https://scootr.it"
+```
+
+#### Test Identity Provider
+
+Please <u>**DO NOT**</u> ever do this.\
+This is just for testing and learning purposes.\
+I'm also assuming you already followed the previous steps.
+
+1. Create Web App
+```
+az webapp create --resource-group scootr --plan scootr-asp --name spidtestidp --deployment-container-image-name italia/spid-testenv2
+```
+
+2. Add custom domain
+```
+az webapp config hostname add --hostname testidp.scootr.it --resource-group scootr --webapp-name spidtestidp
+```
+
+3. Create a managed certificate for the custom domain
+```
+az webapp config ssl create --resource-group scootr --name spidtestidp --hostname testidp.scootr.it
+```
+
+4. Bind the SSL certificate to the web app
+```
+az webapp config ssl bind --certificate-thumbprint {certificate-thumbprint} --name spidtestidp --resource-group scootr --ssl-type SNI
+```
+
+5. Set HTTPS Only mode
+```
+az webapp update --https-only true --name spidtestidp --resource-group scootr
 ```
