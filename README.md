@@ -94,27 +94,42 @@ Please <u>**DO NOT**</u> ever do this.\
 This is just for testing and learning purposes.\
 I'm also assuming you already followed the previous steps.
 
-1. Create Web App
+1. Build the local image
 ```
-az webapp create --resource-group scootr --plan scootr-asp --name spidtestidp --deployment-container-image-name italia/spid-testenv2
+docker build . -f Dockerfile.idp.prod -t testidp:latest
 ```
 
-2. Add custom domain
+2. Tag the local image for the registry
+```
+docker tag testidp scootrregistry.azurecr.io/testidp:latest
+```
+
+3. Push *Test Identity Provider* image to the registry
+```
+docker push scootrregistry.azurecr.io/testidp:latest
+```
+
+4. Create Web App
+```
+az webapp create --resource-group scootr --plan scootr-asp --name spidtestidp --deployment-container-image-name scootrregistry.azurecr.io/testidp:latest
+```
+
+5. Add custom domain
 ```
 az webapp config hostname add --hostname testidp.scootr.it --resource-group scootr --webapp-name spidtestidp
 ```
 
-3. Create a managed certificate for the custom domain
+6. Create a managed certificate for the custom domain
 ```
 az webapp config ssl create --resource-group scootr --name spidtestidp --hostname testidp.scootr.it
 ```
 
-4. Bind the SSL certificate to the web app
+7. Bind the SSL certificate to the web app
 ```
 az webapp config ssl bind --certificate-thumbprint {certificate-thumbprint} --name spidtestidp --resource-group scootr --ssl-type SNI
 ```
 
-5. Set HTTPS Only mode
+8. Set HTTPS Only mode
 ```
 az webapp update --https-only true --name spidtestidp --resource-group scootr
 ```

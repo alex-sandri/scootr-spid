@@ -1,0 +1,7 @@
+FROM italia/spid-testenv2
+
+WORKDIR /app
+
+COPY /idp_prod_conf ./conf
+
+VOLUME ./conf
