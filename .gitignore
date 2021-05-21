@@ -4,8 +4,3 @@
 
 /sp_conf/sp.crt
 /sp_conf/sp.key
-
-/idp_conf/config.yaml
-/idp_conf/idp.key
-/idp_conf/idp.crt
-/idp_conf/users.json
