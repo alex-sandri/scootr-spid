@@ -20,7 +20,7 @@ $settings = [
     ],
     "sp_org_name" => "scootr",
     "sp_org_display_name" => "scootr",
-    "idp_metadata_folder" => Config::ROOT . "/idp_metadata",
+    "idp_metadata_folder" => Config::ROOT . "/idp_metadata/", // Trailing slash is required
     "sp_attributeconsumingservice" => [
         [ "fiscalNumber" ],
         [ "name", "familyName", "fiscalNumber", "email", "dateOfBirth" ]
