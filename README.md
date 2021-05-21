@@ -6,6 +6,12 @@
 
 ### Production
 
+**Note**\
+Before setting the custom domain you need to add these DNS records
+- `CNAME`:
+  - `Name`: *`Your custom domain (e.g.: spid.scootr.it.)`*
+  - `Value`: *`Your Custom Domain Verification ID`* (App Service -> Settings -> Custom Domains)
+
 #### Service Provider
 
 1. Create a resource group
