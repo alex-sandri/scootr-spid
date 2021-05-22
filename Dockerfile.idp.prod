@@ -2,6 +2,7 @@ FROM italia/spid-testenv2
 
 WORKDIR /app
 
+COPY /idp_conf ./conf
 COPY /idp_conf_prod ./conf
 
 VOLUME ./conf
