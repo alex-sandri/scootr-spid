@@ -17,6 +17,7 @@ jobs:
     steps:
       - name: Write files
         run: |
+          mkdir ./sp_conf
           'echo "$SP_CRT" > ./sp_conf/sp.crt'
           'echo "$SP_KEY" > ./sp_conf/sp.key'
         shell: bash
