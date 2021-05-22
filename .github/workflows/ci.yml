@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
       - name: build
-        run: docker build . -t scootrregistry.azurecr.io/sp:${{ github.sha }}
+      - run: docker build . -t scootrregistry.azurecr.io/sp:${{ github.sha }}
   push:
     needs: build
     runs-on: ubuntu-latest
