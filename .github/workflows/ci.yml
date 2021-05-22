@@ -15,7 +15,7 @@ on:
       - master
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -36,16 +36,10 @@ jobs:
 
       - name: build
         run: docker build . -t scootrregistry.azurecr.io/sp:${{ github.sha }}
-  push:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
+
       - name: push
         run: docker push scootrregistry.azurecr.io/sp:${{ github.sha }}
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
+
       - name: deploy
         uses: azure/webapps-deploy@v2
         with:
