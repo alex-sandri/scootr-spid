@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "idp_metadata/**"
+      - "public/**"
+      - "src/**"
+      - "composer.json"
+      - "Dockerfile"
 
 jobs:
   init:
