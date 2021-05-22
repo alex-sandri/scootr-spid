@@ -20,13 +20,9 @@ jobs:
 
       - name: Write files
         run: |
-          mkdir ./sp_conf
-          'echo "$SP_CRT" > ./sp_conf/sp.crt'
-          'echo "$SP_KEY" > ./sp_conf/sp.key'
-        shell: bash
-        env:
-          SP_CRT: ${{ secrets.SP_CRT }}
-          SP_KEY: ${{ secrets.SP_KEY }}
+          mkdir ${{ github.workspace }}/sp_conf
+          echo ${{ secrets.SP_CRT }} > ${{ github.workspace }}/sp_conf/sp.crt
+          echo ${{ secrets.SP_KEY }} > ${{ github.workspace }}/sp_conf/sp.key
   build:
     needs: init
     runs-on: ubuntu-latest
