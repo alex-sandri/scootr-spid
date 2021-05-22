@@ -1,5 +1,7 @@
 # scootr SPID
 
+[![Deployment](https://github.com/alex-sandri/scootr-spid/actions/workflows/ci.yml/badge.svg)](https://github.com/alex-sandri/scootr-spid/actions/workflows/ci.yml)
+
 [scootr](https://github.com/alex-sandri/scootr)'s service to handle [SPID](https://www.spid.gov.it/) authentication.
 
 ## Set up
