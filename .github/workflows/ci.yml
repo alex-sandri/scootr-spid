@@ -24,8 +24,8 @@ jobs:
       - name: Write files
         run: |
           mkdir ${{ github.workspace }}/sp_conf
-          echo ${{ secrets.SP_CRT }} > ${{ github.workspace }}/sp_conf/sp.crt
-          echo ${{ secrets.SP_KEY }} > ${{ github.workspace }}/sp_conf/sp.key
+          echo "${{ secrets.SP_CRT }}" > ${{ github.workspace }}/sp_conf/sp.crt
+          echo "${{ secrets.SP_KEY }}" > ${{ github.workspace }}/sp_conf/sp.key
   build:
     needs: init
     runs-on: ubuntu-latest
