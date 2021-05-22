@@ -152,7 +152,9 @@ if ($sp->isAuthenticated())
         [
             "expires" => 0,
             "path" => "/",
-            "domain" => Config::is_prod() ? $_ENV["CLIENT_HOST"] : false,
+            "domain" => Config::is_prod()
+                ? parse_url($_ENV["CLIENT_HOST"], PHP_URL_HOST)
+                : false,
             "secure" => Config::is_prod(),
             "httponly" => false,
             "samesite" => "Strict",
