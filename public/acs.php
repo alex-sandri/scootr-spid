@@ -152,8 +152,8 @@ if ($sp->isAuthenticated())
         [
             "expires" => 0,
             "path" => "/",
-            "domain" => $_ENV["ENV"] === "prod" ? $_ENV["CLIENT_HOST"] : false,
-            "secure" => $_ENV["ENV"] === "prod",
+            "domain" => Config::is_prod() ? $_ENV["CLIENT_HOST"] : false,
+            "secure" => Config::is_prod(),
             "httponly" => false,
             "samesite" => "Strict",
         ]
