@@ -14,9 +14,9 @@ jobs:
           'echo "$SP_CRT" > ./sp_conf/sp.crt'
           'echo "$SP_KEY" > ./sp_conf/sp.key'
         shell: bash
-          env:
-            SP_CRT: ${{ secrets.SP_CRT }}
-            SP_KEY: ${{ secrets.SP_KEY }}
+        env:
+          SP_CRT: ${{ secrets.SP_CRT }}
+          SP_KEY: ${{ secrets.SP_KEY }}
   build:
     needs: init
     runs-on: ubuntu-latest
