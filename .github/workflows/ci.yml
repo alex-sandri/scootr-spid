@@ -15,21 +15,18 @@ on:
       - master
 
 jobs:
-  init:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@master
 
-      - name: Write files
+      - name: write files
         run: |
           mkdir ${{ github.workspace }}/sp_conf
           echo "${{ secrets.SP_CRT }}" > ${{ github.workspace }}/sp_conf/sp.crt
           echo "${{ secrets.SP_KEY }}" > ${{ github.workspace }}/sp_conf/sp.key
-  build:
-    needs: init
-    runs-on: ubuntu-latest
-    steps:
+
       - name: docker login
         uses: azure/docker-login@v1
         with:
@@ -39,16 +36,10 @@ jobs:
 
       - name: build
         run: docker build . -t scootrregistry.azurecr.io/sp:${{ github.sha }}
-  push:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
+
       - name: push
         run: docker push scootrregistry.azurecr.io/sp:${{ github.sha }}
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
+
       - name: deploy
         uses: azure/webapps-deploy@v2
         with:
