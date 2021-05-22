@@ -15,6 +15,9 @@ jobs:
   init:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@master
+
       - name: Write files
         run: |
           mkdir ./sp_conf
@@ -28,9 +31,6 @@ jobs:
     needs: init
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@master
-
       - name: docker login
         uses: azure/docker-login@v1
         with:
