@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Write files
-      - run: |
+        run: |
           'echo "$SP_CRT" > ./sp_conf/sp.crt'
           'echo "$SP_KEY" > ./sp_conf/sp.key'
         shell: bash
@@ -22,29 +22,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-      - uses: actions/checkout@master
+        uses: actions/checkout@master
 
       - name: docker login
-      - uses: azure/docker-login@v1
+        uses: azure/docker-login@v1
         with:
           login-server: scootrregistry.azurecr.io
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
       - name: build
-      - run: docker build . -t scootrregistry.azurecr.io/sp:${{ github.sha }}
+        run: docker build . -t scootrregistry.azurecr.io/sp:${{ github.sha }}
   push:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: push
-      - run: docker push scootrregistry.azurecr.io/sp:${{ github.sha }}
+        run: docker push scootrregistry.azurecr.io/sp:${{ github.sha }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: deploy
-      - uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v2
         with:
           app-name: scootr
           images: scootrregistry.azurecr.io/sp:${{ github.sha }}
