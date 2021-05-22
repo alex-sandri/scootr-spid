@@ -1,5 +1,5 @@
 ---
-base_url: "https://testidp.scootr.it"
+base_url: "http://localhost:8088"
 key_file: "./conf/idp.key"
 cert_file: "./conf/idp.crt"
 metadata:
@@ -7,8 +7,8 @@ metadata:
   - "./conf/sp_metadata.xml"
 debug: true
 host: 0.0.0.0
-port: 80
-https: true
+port: 8088
+https: false
 endpoints:
   single_sign_on_service: "/sso"
   single_logout_service: "/slo"
