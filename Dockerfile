@@ -10,7 +10,7 @@ RUN rm -rf ./html
 COPY . .
 COPY ./public ./html
 
-VOLUME ./sp_conf
+VOLUME /sp_conf
 
 RUN apt update -y && apt install -y git zip libpq-dev
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
