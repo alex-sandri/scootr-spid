@@ -23,9 +23,10 @@ jobs:
 
       - name: write files
         run: |
-          mkdir ${{ github.workspace }}/sp_conf
-          echo "${{ secrets.SP_CRT }}" > ${{ github.workspace }}/sp_conf/sp.crt
-          echo "${{ secrets.SP_KEY }}" > ${{ github.workspace }}/sp_conf/sp.key
+          touch .env
+          mkdir ./sp_conf
+          echo "${{ secrets.SP_CRT }}" > ./sp_conf/sp.crt
+          echo "${{ secrets.SP_KEY }}" > ./sp_conf/sp.key
 
       - name: docker login
         uses: azure/docker-login@v1
