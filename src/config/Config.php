@@ -11,6 +11,15 @@ class Config
 
     const MIN_AGE = 18;
 
+    /**
+     * These Identity Providers are not allowed
+     * to be accessed in a production environment
+     */
+    const TEST_IDP_LIST = [
+        "idp_testenv2",
+        "xx_servizicie_test",
+    ];
+
     public static function is_prod(): bool
     {
         return $_ENV["ENV"] === "prod";
