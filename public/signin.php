@@ -11,6 +11,13 @@ if (!isset($_GET["idp"]) || empty($_GET["idp"]))
 
 $idp = $_GET["idp"];
 
+if (!file_exists(__DIR__ . "/../idp_metadata/$idp.xml"))
+{
+    http_response_code(404);
+
+    exit;
+}
+
 if (Config::is_prod() && in_array($idp, Config::TEST_IDP_LIST))
 {
     http_response_code(403);
