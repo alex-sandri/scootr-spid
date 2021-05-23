@@ -27,7 +27,7 @@ if (Config::is_prod() && in_array($idp, Config::TEST_IDP_LIST))
 
 if (!$url = $sp->loginPost($idp, 0, 1, 2, null, true))
 {
-    echo "Already logged in !<br>";
+    header("Location: acs.php");
 }
 else
 {
