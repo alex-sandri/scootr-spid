@@ -45,36 +45,6 @@ if ($sp->isAuthenticated())
 
         try
         {
-            $result = pg_query_params(
-                $connection,
-                '
-                select *
-                from "old_users"
-                where "fiscal_number" = $1
-                ',
-                $fiscal_number
-            );
-
-            if (pg_numrows($result) > 0)
-            {
-                pg_query_params(
-                    $connection,
-                    '
-                    insert into "transactions"
-                        ("id", "amount", "wallet", "reason", "external_id")
-                    values
-                        ($1, $2, $3, $4, $5)
-                    ',
-                    [
-                        $transaction_id,
-                        $result["balance"],
-                        $wallet_id,
-                        "restore-balance",
-                        "TODO"
-                    ]
-                );
-            }
-
             pg_query_params(
                 $connection,
                 '
@@ -121,6 +91,37 @@ if ($sp->isAuthenticated())
                     $wallet_id,
                 ]
             );
+
+            $old_user_result = pg_query_params(
+                $connection,
+                '
+                delete from "old_users"
+                where "fiscal_number" = $1
+                returning "balance"
+                ',
+                [
+                    $fiscal_number,
+                ]
+            );
+
+            if (pg_numrows($old_user_result) > 0)
+            {
+                pg_query_params(
+                    $connection,
+                    '
+                    insert into "transactions"
+                        ("id", "amount", "wallet", "reason")
+                    values
+                        ($1, $2, $3, $4)
+                    ',
+                    [
+                        "trx_" . bin2hex(random_bytes(30)),
+                        pg_fetch_row($old_user_result)[0],
+                        $wallet_id,
+                        "restore-balance",
+                    ]
+                );
+            }
 
             $stripe = new \Stripe\StripeClient($_ENV["STRIPE_SECRET_API_KEY"]);
 
