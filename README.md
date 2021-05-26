@@ -11,8 +11,11 @@
 **Note**\
 Before setting the custom domain you need to add these DNS records
 - `CNAME`:
-  - `Name`: *`Your custom domain (e.g.: spid.scootr.it.)`*
-  - `Value`: *`Your Custom Domain Verification ID`* (App Service -> Settings -> Custom Domains)
+  - `Name`: *Your `custom domain` (e.g.: spid.scootr.it.)*
+  - `Value`: *Your Azure `App Service URL` (e.g.: scootr.azurewebsites.net.)*
+- `TXT`:
+  - `Name`: *Your custom domain with the `asuid subdomain` (e.g.: asuid.spid.scootr.it.)*
+  - `Value`: *Your Custom `Domain Verification ID`* (App Service -> Settings -> Custom Domains)
 
 #### Service Provider
 
